@@ -166,6 +166,8 @@ module Foreman::Model
     end
 
     def new_volume(attr = {})
+      # Map :preallocate to :sparse since rbovirt doesn't have a :preallocate attribute
+      attr[:sparse] = attr[:preallocate]
       Fog::Compute::Ovirt::Volume.new(attr)
     end
 
